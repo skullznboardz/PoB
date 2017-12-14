@@ -1,0 +1,12 @@
+.vs
+Build
+Binaries
+DerivedDataCache
+Intermediate
+Saved
+Content/texture
+Content/sprites
+*.sln
+*.sdf
+*.opensdf
+*.opendb
