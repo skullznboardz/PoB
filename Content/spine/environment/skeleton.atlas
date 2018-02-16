@@ -1,0 +1,48 @@
+
+skeleton.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Plant-shrub/PLANT-comp
+  rotate: false
+  xy: 2, 2
+  size: 132, 238
+  orig: 132, 238
+  offset: 0, 0
+  index: -1
+Plant-shrub/PLANT-leaf-1
+  rotate: false
+  xy: 332, 152
+  size: 75, 57
+  orig: 75, 57
+  offset: 0, 0
+  index: -1
+Plant-shrub/PLANT-leaf-2
+  rotate: false
+  xy: 292, 106
+  size: 38, 103
+  orig: 38, 103
+  offset: 0, 0
+  index: -1
+Plant-shrub/PLANT-leaf-3
+  rotate: false
+  xy: 136, 60
+  size: 58, 180
+  orig: 58, 180
+  offset: 0, 0
+  index: -1
+Plant-shrub/PLANT-leaf-4
+  rotate: true
+  xy: 292, 211
+  size: 29, 144
+  orig: 29, 144
+  offset: 0, 0
+  index: -1
+Plant-shrub/PLANT-leaf-5
+  rotate: false
+  xy: 196, 97
+  size: 94, 143
+  orig: 94, 143
+  offset: 0, 0
+  index: -1
