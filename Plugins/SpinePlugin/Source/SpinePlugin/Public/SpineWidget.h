@@ -28,25 +28,33 @@
 * POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#ifndef SPINE_SHAREDLIB_H
-#define SPINE_SHAREDLIB_H
+#pragma once
 
-#ifdef _WIN32
-#define DLLIMPORT __declspec(dllimport)
-#define DLLEXPORT __declspec(dllexport)
-#else
-#ifndef DLLIMPORT
-#define DLLIMPORT
-#endif
-#ifndef DLLEXPORT
-#define DLLEXPORT
-#endif
+#include "SpinePluginPrivatePCH.h"
+
+#include "Runtime/UMG/Public/UMG.h"
+#include "Runtime/UMG/Public/UMGStyle.h"
+
+#include "SpineWidget.generated.h"
+
+class SSpineWidget;
+
+UCLASS(ClassGroup = (Spine), meta = (BlueprintSpawnableComponent))
+class SPINEPLUGIN_API USpineWidget: public UWidget {
+	GENERATED_UCLASS_BODY()
+
+public:
+	virtual void ReleaseSlateResources(bool bReleaseChildren) override;
+	virtual void SynchronizeProperties() override;
+#if WITH_EDITOR
+	virtual const FText GetPaletteCategory() override;
 #endif
 
-#ifdef SPINEPLUGIN_API
-#define SP_API SPINEPLUGIN_API
-#else
-#define SP_API
-#endif
+	UPROPERTY(Category = Spine, EditAnywhere, BlueprintReadOnly)
+	FSlateBrush Brush;
 
-#endif /* SPINE_SHAREDLIB_H */
+protected:
+	virtual TSharedRef<SWidget> RebuildWidget() override;
+
+	TSharedPtr<SSpineWidget> slateWidget;
+};

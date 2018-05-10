@@ -28,25 +28,35 @@
 * POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#ifndef SPINE_SHAREDLIB_H
-#define SPINE_SHAREDLIB_H
+#include "SpinePluginPrivatePCH.h"
+#include "SpineWidget.h"
+#include "SSpineWidget.h"
 
-#ifdef _WIN32
-#define DLLIMPORT __declspec(dllimport)
-#define DLLEXPORT __declspec(dllexport)
-#else
-#ifndef DLLIMPORT
-#define DLLIMPORT
-#endif
-#ifndef DLLEXPORT
-#define DLLEXPORT
-#endif
-#endif
+#define LOCTEXT_NAMESPACE "Spine"
 
-#ifdef SPINEPLUGIN_API
-#define SP_API SPINEPLUGIN_API
-#else
-#define SP_API
-#endif
+USpineWidget::USpineWidget(const FObjectInitializer& ObjectInitializer): Super(ObjectInitializer) {
+}
 
-#endif /* SPINE_SHAREDLIB_H */
+void USpineWidget::SynchronizeProperties() {
+	Super::SynchronizeProperties();
+
+	if (slateWidget.IsValid()) {
+		slateWidget->SetBrush(&Brush);
+	}
+}
+
+void USpineWidget::ReleaseSlateResources(bool bReleaseChildren) {
+	Super::ReleaseSlateResources(bReleaseChildren);
+	slateWidget.Reset();
+}
+
+TSharedRef<SWidget> USpineWidget::RebuildWidget() {
+	this->slateWidget = SNew(SSpineWidget);
+	return this->slateWidget.ToSharedRef();
+}
+
+#if WITH_EDITOR
+const FText USpineWidget::GetPaletteCategory() {
+	return LOCTEXT("Spine", "Spine");
+}
+#endif

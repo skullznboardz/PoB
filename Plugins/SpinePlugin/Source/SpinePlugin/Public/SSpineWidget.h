@@ -28,25 +28,25 @@
 * POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#ifndef SPINE_SHAREDLIB_H
-#define SPINE_SHAREDLIB_H
+#pragma once
 
-#ifdef _WIN32
-#define DLLIMPORT __declspec(dllimport)
-#define DLLEXPORT __declspec(dllexport)
-#else
-#ifndef DLLIMPORT
-#define DLLIMPORT
-#endif
-#ifndef DLLEXPORT
-#define DLLEXPORT
-#endif
-#endif
+#include "SlateCore.h"
+#include "Slate/SMeshWidget.h"  
 
-#ifdef SPINEPLUGIN_API
-#define SP_API SPINEPLUGIN_API
-#else
-#define SP_API
-#endif
+class SSpineWidget: public SMeshWidget {
 
-#endif /* SPINE_SHAREDLIB_H */
+public:
+	SLATE_BEGIN_ARGS(SSpineWidget): _MeshData(nullptr) { }
+	SLATE_ARGUMENT(USlateVectorArtData*, MeshData)
+	SLATE_END_ARGS()
+
+	void Construct(const FArguments& Args);
+
+	void SetBrush(FSlateBrush* Brush);
+
+protected:
+	virtual int32 OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect, FSlateWindowElementList& OutDrawElements, int32 LayerId, const FWidgetStyle& InWidgetStyle, bool bParentEnabled) const override;
+
+	FSlateBrush* brush = nullptr;
+	FRenderData renderData;
+};
